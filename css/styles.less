@@ -2,17 +2,60 @@
     margin: 0;
     padding: 0;
 }
-ul {
+ul, ol {
     list-style: none;
 }
 a img {
     border: 0;
 }
+.clL {
+    clear: left;
+}
 
 /*****************************************/
 /*****************************************/
 
-@colorBackground: #eeeeee;
+.borderRadius (@radius: 5px)
+{
+  border-radius: @radius;
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+  -khtml-border-radius: @radius;
+}
+
+.boxShadow(@size: 0 0 10px, @color: #9c9c9c)
+{
+  box-shadow: @size @color;
+  -moz-box-shadow: @size @color;
+  -webkit-box-shadow: @size @color;
+  -khtml-box-shadow: @size @color;
+}
+
+.textShadow(@size: 0 0 10px, @color: #ffffff)
+{
+  text-shadow: @size @color;
+  -moz-text-shadow: @size @color;
+  -webkit-text-shadow: @size @color;
+  -khtml-text-shadow: @size @color;
+}
+
+.rotate(@deg)
+{
+  -moz-transform:rotate(@deg);
+  -moz-transform:skewx(@deg)
+  translatex(@deg);
+
+  -webkit-transform:rotate(@deg);
+  -o-transform:rotate(@deg);
+  -ms-transform:rotate(@deg);
+
+  filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=@deg);
+}
+
+/*****************************************/
+/*****************************************/
+
+@colorBackground: #e0e0e0;
 @colorBackgroundHeader: #ffffff;
 @colorBorder: #666666;
 @colorText: #333333;
@@ -27,11 +70,13 @@ body {
     font-family: Arial, Verdana, sans-serif;
     font-size: 10px;
     color: @colorText;
-    padding-top: 140px;
+    padding-top: 150px;
 
     section, footer {
+        position: relative;
         width: 800px;
         margin: 0 auto;
+        z-index: 90;
     }
 
     header, nav {
@@ -40,6 +85,7 @@ body {
         width: 100%;
         position: fixed;
         background: @colorBackgroundHeader;
+        z-index: 100;
     }
 
     header {
@@ -70,7 +116,6 @@ body {
 
                 a {
                     display: inline-block;
-
                     width: (800px / 4) - 33;
                     color: @colorLink;
                     text-transform: uppercase;
@@ -87,31 +132,89 @@ body {
                         border-color: @colorLinkHover;
                     }
                 }
+
+                &.current a {
+                        color: @colorLinkHover;
+                        border-color: @colorLinkHover;
+                }
             }
         }
     }
 
     section {
         border-bottom: 1px dashed @colorBorder;
-        padding-bottom: 20px;
+        padding-bottom: 5px;
         margin-bottom: 20px;
+        height: 300px;
+
+        p, li {
+            font-size: 1.2em;
+        }
+
+        a {
+            color: @colorText;
+            text-decoration: underline;
+
+            &:hover {
+                color: @colorLinkHover;
+            }
+        }
 
         h2 {
             color: @colorTitle;
             background: @colorTitleBackground;
-            padding: 5px 150px 5px 10px;
+            padding: 5px 100px 5px 10px;
+            margin-bottom: 15px;
             display: inline-block;
             font-size: 2em;
             font-style: italic;
-            -moz-transform:rotate(-3deg);
-            -webkit-transform:rotate(-3deg);
-            -o-transform:rotate(-3deg);
+            .rotate(-3deg);
+        }
+
+        h3 {
+            font-size: 1.4em;
+            font-weight: bold;
+            padding-bottom: 4px;
+        }
+
+        ul {
+            list-style: disc inside;
+            margin-bottom: 15px;
+
+            li {
+                padding: 2px 0;
+            }
+        }
+
+        .columns {
+            div.col4 {
+                float: left;
+                width: 800px / 4;
+            }
         }
 
         &.active {
             h2 {
                 background: @colorTitleBackgroundActive;
             }
+        }
+
+        &#skills {
+            h2 {
+                padding-right: 30px;
+            }
+        }
+
+        &#references {
+        }
+
+        &#social {
+            h2 {
+                padding-right: 30px;
+            }
+        }
+
+        &#contact {
         }
 
     }
